@@ -1,6 +1,6 @@
 #Homework 2 - Jake TerHark
 ##Run Hadoop Job
-Using hdfs, place the ```data.csv``` file into an HDFS location with the correct permissions.
+Using hdfs, place the ```data.csv``` file for everyone or the ```data_uic.csv``` for just UIC into an HDFS location with the correct permissions.
 In the root directory of the project, run ```sbt assembly``` to build an Uber Jar titled ```CsvGrapher.jar```.
 Copy that jar to a remote machine running Hadoop MapReduce2 (optional).
 Run the command ```hadoop jar CsvGrapher.jar {path_to_data} {output_path}```, replacing the paths with your own.
@@ -103,3 +103,5 @@ namespace XmlTransform
 }
 ```
 
+###Result
+![Graph of CS Faculty](graph.png)
