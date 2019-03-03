@@ -18,9 +18,11 @@ From the ```dtd``` file I copied the unicode entity elements into the ```DOCTYPE
 I then ran a simple .net script on the file to transform the data from xml into csv (see end for script).
 If any article had these authors:
 ```xml
-<author>Mark Grechanik</author>
-<author>B. M. Mainul Hossain</author>
-<author>Ugo Buy</author>
+<inproceedings>
+    <author>Mark Grechanik</author>
+    <author>B. M. Mainul Hossain</author>
+    <author>Ugo Buy</author>
+</inproceedings>
 ```
 
 Then this data would be transformed to:
@@ -40,8 +42,8 @@ The mapped values for authors ```a, b, c``` would be:
 | a   | c     |
 | b   | c     |
 
-Singular authors get mapped to themselves. The reason for this is explained in the graph visualization
-The reducer simply combines these key/value pairs in a csv file. This file has the following format:
+Singular authors get mapped to themselves. The reason for this is explained in the graph visualization.
+The reducer simply combines these key/value pairs in a csv file of the following format:
 ```csv
 ...
 Sarmimala Saikia,Ashwin Srinivasan
@@ -67,9 +69,9 @@ In the overview tab, go to appearance->Nodes->Ranking, click the node size icon,
 This sets the size of the node to be the number of edges attached to the node.
 This represents the number of articles that a particular author has written. This is why the self loops were kept.
 Other areas for appearance include:
-+ Show edge weights
-+ Show node labels (authors)
-+ Run eigenvector statistic script and arrange via the results
+*   Show edge weights
+*   Show node labels (authors)
+*   Run eigenvector statistic script and arrange via the results
 Export the graph in whatever format you wish.
 
 ###C# Transform Script
@@ -78,15 +80,15 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace ConsoleApp1
+namespace XmlTransform
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var xml = XElement.Load(@"C:\Users\jaket\Downloads\dblp-2019-02-01.xml");
+            var xml = XElement.Load(@"H:\data\dblp-2019-02-01.xml");
             var n = xml.FirstNode as XElement;
-            using (var writer = new StreamWriter(@"C:\Users\jaket\Desktop\data.csv"))
+            using (var writer = new StreamWriter(@"H:\data\data.csv"))
             {
                 while (n != null)
                 {
