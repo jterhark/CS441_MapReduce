@@ -69,6 +69,7 @@ In the overview tab, go to appearance->Nodes->Ranking, click the node size icon,
 This sets the size of the node to be the number of edges attached to the node.
 This represents the number of articles that a particular author has written. This is why the self loops were kept.
 Other areas for appearance include:
+
 * Show edge weights
 * Show node labels (authors)
 * Run eigenvector statistic script and arrange via the results
