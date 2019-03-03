@@ -35,18 +35,45 @@ The mapped values for authors ```a, b, c``` would be:
 
 	
 | Key | Value |
+| --- | ----- |
+| a   | b     |
+| a   | c     |
+| b   | c     |
 
-| ---|---|
+Singular authors get mapped to themselves. The reason for this is explained in the graph visualization
+The reducer simply combines these key/value pairs in a csv file. This file has the following format:
+```csv
+...
+Sarmimala Saikia,Ashwin Srinivasan
+Sarmin Hamidi,Mohammad Mahdi Rahimi
+Sarmin Hossain,Laurence Brooks
+Sarminah Samad,Azar Alizadeh
+Sarminah Samad,Elnaz Akbari
+Sarmishtha Ghoshal,Krishnendu Chakrabarty
+Sarmishtha Ghoshal,Krishnendu Chakrabarty
+Sarmishtha Ghoshal,Bhargab B. Bhattacharya
+Sarmishtha Ghoshal,Krishnendu Chakrabarty
+Sarmishtha Ghoshal,Bhargab B. Bhattacharya
+Sarmishtha Ghoshal,Bhargab B. Bhattacharya
+...
+```
 
-| a | b |
-| a | c |
-| b | c |
-
+If multiple output files are produced, merge the files into one. (Just copy and past, nothing special needed.)
 
 ###Graph Visualization
+Import the graph into Gephi as a mixed csv format with undirected edges as explained [here](https://gephi.org/users/supported-graph-formats/csv-format/).
+Since repeats in the mapping/reducing process were kept, anytime another key/value pair that contain the same values is imported, the weight of the edge is increased by one.
+In the overview tab, go to appearance->Nodes->Ranking, click the node size icon, choose the ranking to be degree, and click Apply.
+This sets the size of the node to be the number of edges attached to the node.
+This represents the number of articles that a particular author has written. This is why the self loops were kept.
+Other areas for appearance include:
++ Show edge weights
++ Show node labels (authors)
++ Run eigenvector statistic script and arrange via the results
+Export the graph in whatever format you wish.
 
 ###C# Transform Script
-```C#
+```csharp
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
