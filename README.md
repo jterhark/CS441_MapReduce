@@ -1,5 +1,5 @@
-#Homework 2 - Jake TerHark
-##Run Hadoop Job
+# Homework 2 - Jake TerHark
+## Run Hadoop Job
 Using hdfs, place the ```data.csv``` file for everyone or the ```data_uic.csv``` for just UIC into an HDFS location with the correct permissions.
 In the root directory of the project, run ```sbt assembly``` to build an Uber Jar titled ```CsvGrapher.jar```.
 Copy that jar to a remote machine running Hadoop MapReduce2 (optional).
@@ -7,11 +7,11 @@ Run the command ```hadoop jar CsvGrapher.jar {path_to_data} {output_path}```, re
 I chose this route instead of hardcoding values in the config file to allow for bash autocomplete.
 The output will be in csv format and can be imported into gephi.
 
-##Testing
+## Testing
 To run the tests that make sure the needed libraries are loaded, simply run ```sbt test``` in the project root.
 
-##Methodology
-###Preprocessing Data
+## Methodology
+### Preprocessing Data
 Since there is no default XML Input Format for MapReduce, I chose to preproccess the xml file, rather than write my own formatter.
 The two data files I started with were ```dblp-2019-02-01.xml``` which contained the data, and ```dblp-2017-08-29.dtd``` which contained the schema
 From the ```dtd``` file I copied the unicode entity elements into the ```DOCTYPE``` element in the xml file for unicode support.
@@ -30,7 +30,7 @@ Then this data would be transformed to:
 "Mark Grechanik","B. M. Mainul Hossain","Ugo Buy" <-newline here
 ```
 
-###Mapping and Reducing
+### Mapping and Reducing
 Due to the structure of the data transformation, I was able to use the Text format which shards on the newline character.
 Thus, each value passed to the mapper would be the shared authors of one article.
 The mapped values for authors ```a, b, c``` would be:
@@ -62,7 +62,7 @@ Sarmishtha Ghoshal,Bhargab B. Bhattacharya
 
 If multiple output files are produced, merge the files into one. (Just copy and past, nothing special needed.)
 
-###Graph Visualization
+### Graph Visualization
 Import the graph into Gephi as a mixed csv format with undirected edges as explained [here](https://gephi.org/users/supported-graph-formats/csv-format/).
 Since repeats in the mapping/reducing process were kept, anytime another key/value pair that contain the same values is imported, the weight of the edge is increased by one.
 In the overview tab, go to appearance->Nodes->Ranking, click the node size icon, choose the ranking to be degree, and click Apply.
@@ -103,5 +103,5 @@ namespace XmlTransform
 }
 ```
 
-###Result
+### Result
 ![Graph of CS Faculty](graph.png)
